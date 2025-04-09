@@ -6,16 +6,10 @@ CREATE TABLE cart(
     total_price NUMERIC(10, 2) NOT NULL
 );
 
-CREATE TABLE wishlists(
-    id SERIAL PRIMARY KEY,
-    product_id VARCHAR(255)
-);
-
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     password_with_salt VARCHAR(255) NOT NULL,
-    wishlist_id SERIAL REFERENCES wishlists(id) ON DELETE CASCADE,
     cart_id SERIAL REFERENCES cart(id) ON DELETE CASCADE,
     role ROL_TYPE NOT NULL DEFAULT 'Buyer'
 );
@@ -28,6 +22,13 @@ CREATE TABLE products(
     description TEXT,
     seller_id SERIAL REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE users_wishlisted(
+    id SERIAL PRIMARY KEY,
+    product_id SERIAL REFERENCES products(id) ON DELETE CASCADE,
+    user_id SERIAL REFERENCES users(id) ON DELETE CASCADE
+);
+
 
 CREATE TABLE product_cart(
     id SERIAL PRIMARY KEY,
@@ -42,3 +43,4 @@ CREATE TABLE sale(
     sale_state SALE_STATE NOT NULL DEFAULT 'Pending',
     total_price NUMERIC(10, 2) NOT NULL
 );
+

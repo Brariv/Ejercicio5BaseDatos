@@ -1,9 +1,3 @@
-INSERT INTO wishlists (product_id) VALUES
-('1,2,3'), ('4,5'), ('6,7,8'), ('9'), ('10,11'),
-('12,13'), ('14'), ('15'), ('2,6,10'), ('3,9'),
-('1,5'), ('4,7'), ('8,11'), ('6,10'), ('13,15'),
-('3'), ('7'), ('9,12'), ('14'), ('2');
-
 INSERT INTO cart (total_price) VALUES
 (80.29), (57.49), (85.75), (60.60), (48.99),
 (75.28), (59.97), (34.90), (66.50), (67.19),
@@ -12,24 +6,24 @@ INSERT INTO cart (total_price) VALUES
 (55.27), (42.48), (50.60), (60.00), (48.00),
 (67.00), (50.00), (45.00), (52.50), (78.20);
 
-INSERT INTO users (username, password_with_salt, wishlist_id, cart_id, role) VALUES
-('ana_artesana', 'hashed_pass_1', 1, 1, 'Buyer'),
-('carlos_creativo', 'hashed_pass_2', 2, 2, 'Buyer'),
-('diana_diy', 'hashed_pass_3', 3, 3, 'Buyer'),
-('pablo_pintor', 'hashed_pass_4', 4, 4, 'Buyer'),
-('lucia_luces', 'hashed_pass_5', 5, 5, 'Buyer'),
-('miguel_manos', 'hashed_pass_6', 6, 6, 'Buyer'),
-('sofia_scrap', 'hashed_pass_7', 7, 7, 'Buyer'),
-('raul_retro', 'hashed_pass_8', 8, 8, 'Buyer'),
-('elena_estilo', 'hashed_pass_9', 9, 9, 'Buyer'),
-('jorge_jardin', 'hashed_pass_10', 10, 10, 'Buyer');
+INSERT INTO users (username, password_with_salt, cart_id, role) VALUES
+('ana_artesana', 'hashed_pass_1',  1, 'Buyer'),
+('carlos_creativo', 'hashed_pass_2',  2, 'Buyer'),
+('diana_diy', 'hashed_pass_3',  3, 'Buyer'),
+('pablo_pintor', 'hashed_pass_4',  4, 'Buyer'),
+('lucia_luces', 'hashed_pass_5',  5, 'Buyer'),
+('miguel_manos', 'hashed_pass_6',  6, 'Buyer'),
+('sofia_scrap', 'hashed_pass_7',  7, 'Buyer'),
+('raul_retro', 'hashed_pass_8',  8, 'Buyer'),
+('elena_estilo', 'hashed_pass_9',  9, 'Buyer'),
+('jorge_jardin', 'hashed_pass_10',  10, 'Buyer');
 
-INSERT INTO users (username, password_with_salt, wishlist_id, cart_id, role) VALUES
-('vendedor_arte1', 'hashed_seller_1', 11, 11, 'Seller'),
-('vendedor_arte2', 'hashed_seller_2', 12, 12, 'Seller'),
-('vendedor_arte3', 'hashed_seller_3', 13, 13, 'Seller'),
-('vendedor_arte4', 'hashed_seller_4', 14, 14, 'Seller'),
-('vendedor_arte5', 'hashed_seller_5', 15, 15, 'Seller');
+INSERT INTO users (username, password_with_salt, cart_id, role) VALUES
+('vendedor_arte1', 'hashed_seller_1', 11, 'Seller'),
+('vendedor_arte2', 'hashed_seller_2', 12, 'Seller'),
+('vendedor_arte3', 'hashed_seller_3', 13, 'Seller'),
+('vendedor_arte4', 'hashed_seller_4', 14, 'Seller'),
+('vendedor_arte5', 'hashed_seller_5', 15, 'Seller');
 
 INSERT INTO products (name, price, stock, description, seller_id) VALUES
 ('Kit de bordado floral', 25.99, 10, 'Incluye hilos, agujas y telas con patrones florales.', 11),
@@ -96,3 +90,7 @@ INSERT INTO sale (cart_id, sale_state, total_price) VALUES
 (28, 'Payed', 45.00),
 (29, 'Pending', 52.50),
 (30, 'Payed', 78.20);
+
+INSERT INTO users_wishlisted (product_id, user_id) VALUES
+(1,3), (1,4), (1,5);
+
