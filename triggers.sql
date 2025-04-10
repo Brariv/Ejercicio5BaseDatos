@@ -68,6 +68,29 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+-- When you delete a user that is a buyer, all their wishlists are deleted
+CREATE OR REPLACE FUNCTION delete_wishlist() RETURNS trigger AS
+$$
+BEGIN
+   IF OLD.role = 'Buyer' THEN
+       DELETE FROM users_wishlisted
+       WHERE user_id = OLD.id;
+   END IF;
+   RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- When you delete a user that is a seller, all their products are deleted
+CREATE OR REPLACE FUNCTION delete_product() RETURNS trigger AS
+$$
+BEGIN
+   IF OLD.role = 'Seller' THEN
+       DELETE FROM products
+       WHERE seller_id = OLD.id;
+   END IF;
+   RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
 
 -- DELETE TRIGGERS
 
@@ -106,3 +129,14 @@ AFTER UPDATE ON sale
 FOR EACH ROW
 EXECUTE PROCEDURE delete_products_on_sale();
 
+
+-- TRUNCATE TRIGGERS
+CREATE TRIGGER truncate_wishlists
+BEFORE TRUNCATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE delete_wishlist();
+
+CREATE TRIGGER truncate_products
+BEFORE TRUNCATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE delete_product();
