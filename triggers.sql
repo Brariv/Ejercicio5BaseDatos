@@ -56,7 +56,7 @@ $$
 BEGIN
    IF NEW.sale_state = 'Payed' THEN
        DELETE FROM products
-       WHEREAND seller_id IN (
+       WHERE seller_id IN (
            SELECT u.id
            FROM users u
            JOIN cart c ON c.id = NEW.cart_id
